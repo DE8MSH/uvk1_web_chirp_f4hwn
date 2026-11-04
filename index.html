@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1220"><title>UV-K1 Web CHIRP · F4HWN</title></head>
+<body style="background:#091322;color:#e9f0ff;font-family:system-ui,sans-serif;margin:3rem">
+<div id="loading">UV-K1 Web CHIRP F4HWN wird geladen …</div>
+<script type="module">
+try {
+  const response=await fetch('./site.json.gz');
+  if (!response.ok) throw new Error('Webapp-Paket nicht erreichbar: HTTP '+response.status);
+  if (!('DecompressionStream' in globalThis)) throw new Error('Browser unterstützt gzip-DecompressionStream nicht. Bitte aktuelles Chrome/Chromium verwenden.');
+  const decoded=await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).text();
+  const pkg=JSON.parse(decoded);
+  document.head.insertAdjacentHTML('beforeend','<style>'+pkg.css+'</style>');
+  document.body.innerHTML=pkg.body;
+  globalThis.__UVK1_WASM_URL=new URL('./wasm/codec.wasm',location.href).href;
+  const moduleURL=URL.createObjectURL(new Blob([pkg.js],{type:'text/javascript'}));
+  try { await import(moduleURL); } finally { URL.revokeObjectURL(moduleURL); }
+} catch (err) {
+  document.getElementById('loading')?.replaceWith(document.createTextNode('Startfehler: '+err.message));
+  console.error(err);
+}
+</script></body></html>
