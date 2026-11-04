@@ -22,7 +22,7 @@ Mit Chrome oder Chromium über HTTPS aufrufen; die Web Serial API wird nicht in 
 
 ## Wartung & Tests
 
-Die ausgepackten Dateien `f4hwn.js`, `app.js` und `index.html` sind der editierbare Quellcode. `python3 scripts/make-site.py` erzeugt `site.json.gz` und `site.bundle.mjs`. `node tests/test.mjs` testet EEPROM-Roundtrips sowie CRC/XOR und das tatsächlich mitgelieferte WASM. `bash scripts/build-wasm.sh` erzeugt die WebAssembly-Datei mit `emcc` (installiertes und aktiviertes Emscripten nötig).
+Die ausgepackten Dateien `f4hwn.js`, `app.js` und `index.html` sind der editierbare Quellcode. `python3 scripts/make-site.py` erzeugt `site.json.gz` und `site.bundle.mjs`. `node tests/test.mjs` testet EEPROM-Roundtrips sowie CRC/XOR und das tatsächlich mitgelieferte WASM. `bash scripts/build-wasm.sh` erzeugt die WebAssembly-Datei mit `emcc` (installiertes und aktiviertes Emscripten nötig). Für Linux Mint 22: `bash PRUEFEN.sh` prüft das Projekt und `bash BAUEN.sh` baut bei installiertem `emcc` neu.
 
 ## Grenzen und Risiken
 
